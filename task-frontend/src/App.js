@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const token = "YOUR_JWT_TOKEN_HERE";
+  const token = "YOUR_JWT_TOKEN_HERE"; // Replace with actual token retrieval logic
+  
+useEffect(() => {
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/tasks", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => setTasks(data));
-  }, []);
+  fetch("http://localhost:3000/api/tasks", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(res => res.json())
+    .then(data => setTasks(data));
+}, []);
 
   return (
     <div>
@@ -23,5 +25,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;

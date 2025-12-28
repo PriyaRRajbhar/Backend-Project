@@ -1,20 +1,25 @@
-const express = require ('express');  // Import the Express library
-const connectDB = require("./config/db"); // Import the database connection function
-const app = express(); // Create an Express application instance
-app.use(express.json());
-app.use("/api/auth", require("./routes/authRoutes"));
+const express = require("express");              // Import Express
+const connectDB = require("./config/db");        // Import DB connection
+const taskRoutes = require("./routes/taskRoutes"); // ✅ Import task routes
 
+const app = express();                           // Create app
 
-const PORT = 5000; // Define the port number
+connectDB();                                     // ✅ Connect to MongoDB
 
-app.get("/", (req, res) => {             // someone visits the route "/" 
-    // res.send("Hello from backend");  
-    res.send('server with DB is running')   // then send this response, backend sends response to the browser/client/frontend
+app.use(express.json());                         // Parse JSON bodies
+app.use("/api/tasks", taskRoutes);               // Use task routes
+
+const PORT = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Server with DB is running");
 });
 
-app.listen(PORT, () => {              // Start the server and listen on the defined port
-    console.log(`Server started on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
 
+// const cors = require("cors");
+// app.use(cors());                // Cross Origin Resource Sharing // ORIGIN -> protocol + domain + port // Allow requests from this origin
 
 
