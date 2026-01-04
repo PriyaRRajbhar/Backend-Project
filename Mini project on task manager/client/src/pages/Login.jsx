@@ -15,6 +15,12 @@ function Login() {
 
     const data = await res.json();
 
+    // SAVE TOKEN
+    localStorage.setItem("token", data.token);
+    alert("Login successful");
+
+
+
     if (!res.ok) {
       alert(data.message);
       return;
