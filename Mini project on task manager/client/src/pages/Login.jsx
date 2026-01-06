@@ -36,7 +36,7 @@ function Login() {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2 className="bg-red">Login</h2>
 
       <form onSubmit={handleSubmit}>
         <input

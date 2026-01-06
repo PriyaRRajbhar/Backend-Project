@@ -32,7 +32,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <div class="bg-sky-50 p-4 rounded">
       <h2>Register</h2>
 
       <form onSubmit={handleSubmit}>
