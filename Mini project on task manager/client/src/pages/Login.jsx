@@ -35,8 +35,8 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2 className="bg-red">Login</h2>
+    <div className='bg-black h-screen'>
+      <h2 className="text-3xl font-bold text-blue-600">Login</h2>
 
       <form onSubmit={handleSubmit}>
         <input
