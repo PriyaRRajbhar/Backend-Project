@@ -35,25 +35,38 @@ function Login() {
   };
 
   return (
-    <div className='bg-black h-screen'>
-      <h2 className="text-3xl font-bold text-blue-600">Login</h2>
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-xl shadow-lg w-80"
+    >
+      <h2 className="text-2xl font-bold text-center mb-4">
+        Login
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <input
+        type="email"
+        placeholder="Email"
+        className="w-full p-2 mb-3 border rounded"
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <input
+        type="password"
+        placeholder="Password"
+        className="w-full p-2 mb-4 border rounded"
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-}
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+);}
+
 
 export default Login;
