@@ -7,29 +7,36 @@ function Tasks() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/tasks", {
-      headers: {
-        Authorization: `Bearer ${token}`
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/tasks", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Unauthorized");
       }
-    })
-      .then(res => res.json())
-      .then(data => setTasks(data));
-  }, []);
 
-  const addTask = async () => {
-    const res = await fetch("http://localhost:3000/api/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      },
-      body: JSON.stringify({ title })
-    });
+      const data = await res.json();
 
-    const data = await res.json();
-    setTasks([...tasks, data]);
-    setTitle("");
+      if (Array.isArray(data)) {
+        setTasks(data);
+      } else {
+        setTasks([]);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Please login again");
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    }
   };
+
+  fetchTasks();
+}, []);
+
 
   return (
     <div>
